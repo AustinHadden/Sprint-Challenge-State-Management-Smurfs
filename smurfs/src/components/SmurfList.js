@@ -5,7 +5,7 @@ import Loader from "react-loader-spinner";
 import Smurf from "./Smurf";
 
 function SmurfList(props) {
-  console.log("SmurfList props", props);
+  //console.log("SmurfList props", props);
   const [newSmurf, setNewSmurf] = useState({
     name: "",
     age: 0,
@@ -14,18 +14,19 @@ function SmurfList(props) {
 
   const changeHandler = e => {
       //console.log(e.target.value);
-      setNewSmurf(e.target.value);
+      setNewSmurf({...newSmurf, [e.target.name]: e.target.value});
   }
 
-  const submitEntry = () => {
-      addNewSmurf(newSmurf);
-      console.log(newSmurf)
+  const submitEntry = (e) => {
+      e.preventDefault();
+      props.addNewSmurf(newSmurf);
+      // console.log('newSmurf', newSmurf)
   }
 
   return (
     <>
     <div className="smurf-entry">
-        <form onSubmit={submitEntry}>
+        <form>
           <label htmlFor="name">Name</label>
           <input
             name="name"
@@ -52,7 +53,7 @@ function SmurfList(props) {
             value={newSmurf.height}
           /> 
 
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={(e) => submitEntry(e)}>Submit</button>
 
          
         </form>      

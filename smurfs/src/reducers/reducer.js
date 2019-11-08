@@ -1,5 +1,5 @@
-import { FETCH_SMURF_LOADING, FETCH_SMURF_SUCCESS, FETCH_SMURF_FAILED, ADD_NEW_SMURF } from '../actions'
-import axios from 'axios';
+import { FETCH_SMURF_LOADING, FETCH_SMURF_SUCCESS, FETCH_SMURF_FAILED } from '../actions'
+
 
 export const initialState = {
     isLoading: false,
@@ -39,13 +39,6 @@ export const reducer = (state, action) => {
                     isLoading: false,
                     error: action.payload
                 };
-                case ADD_NEW_SMURF:
-                    return (
-                        console.log('new Smurf', action.payload),
-                        axios.post('http://localhost:3333/smurfs', action.payload)
-                        .then(response => console.log(response.data))
-                        .catch(error => console.log(error.response))
-                    );
         default:
             return state;
     }
